@@ -18,15 +18,15 @@ let img2;
 let img3;
 let img4;
 
-// function preload() {
-//   img0 = loadImage("asset/0.png");
-//   img1 = loadImage("asset/1.png");
-//   img2 = loadImage("asset/2.png");
-//   img3 = loadImage("asset/3.png");
-//   img4 = loadImage("asset/4.png");
+function preload() {
+  img0 = loadImage("asset/0.png");
+  img1 = loadImage("asset/1.png");
+  img2 = loadImage("asset/2.png");
+  img3 = loadImage("asset/3.png");
+  img4 = loadImage("asset/4.png");
 
-//   bg = loadImage("asset/bubble.jpg");
-// }
+  bg = loadImage("asset/bubble.jpg");
+}
 
 function setup() {
   //createCanvas(972, 648);
@@ -37,8 +37,8 @@ function setup() {
 }
 
 function draw() {
-  // background(bg);
-  background(168);
+  background(bg);
+
   push();
   imageMode(CENTER);
 
