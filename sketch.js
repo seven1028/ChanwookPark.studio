@@ -1,5 +1,3 @@
-//테스트지말입니다.
-
 let x0 = 0;
 let y0 = 0;
 let x1 = 0;
@@ -29,14 +27,19 @@ function preload() {
 }
 
 function setup() {
-  //createCanvas(972, 648);
-  createCanvas(565.6*2, 424.2*2);
+  // createCanvas(565.6 * 2, 424.2 * 2);
+  createCanvas(windowWidth,windowHeight);
   
   cursor(HAND);
   //cursor('grab');
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function draw() {
+
   background(bg);
 
   push();
