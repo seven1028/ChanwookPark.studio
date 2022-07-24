@@ -10,6 +10,7 @@ let x4 = 0;
 let y4 = 0;
 
 let bg;
+let forder;
 let img0;
 let img1;
 let img2;
@@ -23,13 +24,14 @@ function preload() {
   img3 = loadImage("asset/3.png");
   img4 = loadImage("asset/4.png");
 
+  folder = loadImage("asset/folder.png");
   bg = loadImage("asset/bubble.jpg");
 }
 
 function setup() {
   // createCanvas(565.6 * 2, 424.2 * 2);
-  createCanvas(windowWidth,windowHeight);
-  
+  createCanvas(windowWidth, windowHeight);
+
   cursor(HAND);
   //cursor('grab');
 }
@@ -39,8 +41,21 @@ function windowResized() {
 }
 
 function draw() {
-
   background(bg);
+
+  push();
+
+  translate(35, 35);
+  scale(1);
+
+  imageMode(CENTER);
+  image(folder, 0, 0, 60, 60);
+  image(folder, 0, 60, 60, 60);
+  image(folder, 0, 120, 60, 60);
+  image(folder, 0, 180, 60, 60);
+  image(folder, 0, 240, 60, 60);
+
+  pop();
 
   push();
   imageMode(CENTER);
