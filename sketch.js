@@ -50,10 +50,10 @@ function draw() {
 
   imageMode(CENTER);
   image(folder, 0, 0, 60, 60);
-  image(folder, 0, 60, 60, 60);
-  image(folder, 0, 120, 60, 60);
-  image(folder, 0, 180, 60, 60);
-  image(folder, 0, 240, 60, 60);
+  image(folder, 0, 70, 60, 60);
+  image(folder, 0, 140, 60, 60);
+  image(folder, 0, 210, 60, 60);
+  image(folder, 0, 280, 60, 60);
 
   pop();
 
