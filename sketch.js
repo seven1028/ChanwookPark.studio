@@ -45,7 +45,7 @@ function draw() {
 
   push();
 
-  translate(35, 35);
+  translate(40, 35);
   scale(1);
 
   imageMode(CENTER);
