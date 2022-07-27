@@ -17,6 +17,9 @@ let img2;
 let img3;
 let img4;
 
+let s = 1;
+let target = 1;
+
 function preload() {
   img0 = loadImage("asset/0.webp");
   img1 = loadImage("asset/1.webp");
@@ -34,6 +37,19 @@ function setup() {
 
   cursor(HAND);
   //cursor('grab');
+  //   push();
+
+  //     translate(35, 35);
+  //     scale(1);
+
+  //     imageMode(CENTER);
+  //     image(folder, 0, 0, 60, 60);
+  //     image(folder, 0, 70, 60, 60);
+  //     image(folder, 0, 140, 60, 60);
+  //     image(folder, 0, 210, 60, 60);
+  //     image(folder, 0, 280, 60, 60);
+
+  //   pop();
 }
 
 function windowResized() {
@@ -42,21 +58,10 @@ function windowResized() {
 
 function draw() {
   background(bg);
+  krug();
+}
 
-  push();
-
-  translate(40, 35);
-  scale(1);
-
-  imageMode(CENTER);
-  image(folder, 0, 0, 60, 60);
-  image(folder, 0, 70, 60, 60);
-  image(folder, 0, 140, 60, 60);
-  image(folder, 0, 210, 60, 60);
-  image(folder, 0, 280, 60, 60);
-
-  pop();
-
+function krug() {
   push();
   imageMode(CENTER);
 
@@ -89,9 +94,6 @@ function draw() {
   image(img0, x0, y0, 56 * s, 175 * s);
   pop();
 }
-
-let s = 1;
-let target = 1;
 
 function mouseClicked() {
   target = target + 0.1;
