@@ -18,7 +18,7 @@ let img3;
 let img4;
 
 let s = 1;
-let target = 1;
+let target = 1.5;
 
 function preload() {
   img0 = loadImage("asset/0.webp");
@@ -27,7 +27,7 @@ function preload() {
   img3 = loadImage("asset/3.webp");
   img4 = loadImage("asset/4.webp");
 
-  folder = loadImage("asset/folder.png");
+  // folder = loadImage("asset/folder.png");
   bg = loadImage("asset/bubble.jpg");
 }
 
@@ -85,7 +85,7 @@ function krug() {
 
   //tint(255,125);
 
-  s = lerp(s, target, 0.1);
+  s = lerp(s, target, 0.035);
 
   image(img4, x4, y4, 56 * s, 175 * s);
   image(img3, x3, y3, 56 * s, 175 * s);
@@ -96,5 +96,5 @@ function krug() {
 }
 
 function mouseClicked() {
-  target = target + 0.1;
+  target = target + 0.5;
 }
