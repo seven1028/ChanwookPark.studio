@@ -18,11 +18,11 @@ let img3;
 let img4;
 
 function preload() {
-  img0 = loadImage("asset/0.png");
-  img1 = loadImage("asset/1.png");
-  img2 = loadImage("asset/2.png");
-  img3 = loadImage("asset/3.png");
-  img4 = loadImage("asset/4.png");
+  img0 = loadImage("asset/0.webp");
+  img1 = loadImage("asset/1.webp");
+  img2 = loadImage("asset/2.webp");
+  img3 = loadImage("asset/3.webp");
+  img4 = loadImage("asset/4.webp");
 
   folder = loadImage("asset/folder.png");
   bg = loadImage("asset/bubble.jpg");
