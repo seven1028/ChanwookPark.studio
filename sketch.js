@@ -28,7 +28,7 @@ function preload() {
   img4 = loadImage("asset/4.webp");
 
   // folder = loadImage("asset/folder.png");
-  bg = loadImage("asset/bubble.jpg");
+  bg = loadImage("asset/bg.webp");
 }
 
 function setup() {
