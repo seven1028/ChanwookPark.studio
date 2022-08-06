@@ -8,7 +8,7 @@ let zoff = 0;
 function setup() {
   createCanvas(600,600);
   backGradient();
-  slider = createSlider(0, 100, 15, 0.01);
+  slider = createSlider(0, 200, 15, 0.01);
 
   slider.size(400);
   slider.position(width/2-200,height-100);
@@ -160,7 +160,7 @@ function maku(x, y) {
 }
 
 function backGradient() {
-  let c3 = map(noiseMax,0,100,0,255)
+  let c3 = map(noiseMax,0,200,0,255)
 
   c1 = color(0);
   c2 = color(c3);
