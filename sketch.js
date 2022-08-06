@@ -1,100 +1,175 @@
-let x0 = 0;
-let y0 = 0;
-let x1 = 0;
-let y1 = 0;
-let x2 = 0;
-let y2 = 0;
-let x3 = 0;
-let y3 = 0;
-let x4 = 0;
-let y4 = 0;
-
-let bg;
-let forder;
-let img0;
-let img1;
-let img2;
-let img3;
-let img4;
-
-let s = 1;
-let target = 1.5;
-
-function preload() {
-  img0 = loadImage("asset/0.webp");
-  img1 = loadImage("asset/1.webp");
-  img2 = loadImage("asset/2.webp");
-  img3 = loadImage("asset/3.webp");
-  img4 = loadImage("asset/4.webp");
-
-  // folder = loadImage("asset/folder.png");
-  bg = loadImage("asset/bg.webp");
-}
+let c1,c2;
+let s=1,t=0;
+let noiseMax = 0;
+let slider;
+let phase = 0;
+let zoff = 0;
 
 function setup() {
-  // createCanvas(565.6 * 2, 424.2 * 2);
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(600,600);
+  backGradient();
+  slider = createSlider(0, 200, 15, 0.01);
 
-  cursor(HAND);
-  //cursor('grab');
-  //   push();
-
-  //     translate(35, 35);
-  //     scale(1);
-
-  //     imageMode(CENTER);
-  //     image(folder, 0, 0, 60, 60);
-  //     image(folder, 0, 70, 60, 60);
-  //     image(folder, 0, 140, 60, 60);
-  //     image(folder, 0, 210, 60, 60);
-  //     image(folder, 0, 280, 60, 60);
-
-  //   pop();
+  slider.size(400);
+  slider.position(width/2-200,height-100);
+  
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  // resizeCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
-  background(bg);
-  krug();
+  backGradient();
+  // circle(width/2,height/2,noiseMax*3);
+  
+  maku(width / 2, height / 2);
 }
 
-function krug() {
-  push();
-  imageMode(CENTER);
+function maku(x, y) {
+  translate(x, y);
+ 
+  if(keyIsPressed) {
+      if(keyCode == '32'){
+      t = 2;
+      s = lerp(s,t,0.2);
+      scale(s);
+      }
+     }else{
+      t = 1;
+      s = lerp(s,t,0.2);
+     scale(s);
+     }
 
-  x4 = lerp(x4, x3, 0.04);
-  y4 = lerp(y4, y3, 0.04);
+  let center = createVector(x,y);
+  let mouse = createVector(mouseX,mouseY);
+  let move = p5.Vector.sub(mouse,center);
+  move.mult(1);
+  
+  let faceMove = move.copy();
+  faceMove.mult(0.05);
+  faceMove.limit(noiseMax/10);
 
-  x3 = lerp(x3, x2, 0.04);
-  y3 = lerp(y3, y2, 0.04);
+  
+  let eyeballMove = move.copy();
+  eyeballMove.mult(0.08);
+  eyeballMove.limit(noiseMax/4);
+  
+  let pupilMove = move.copy();
+  pupilMove.mult(0.135);
+  pupilMove.limit(noiseMax/2);
+  
+  
+    push(); // 얼굴 본체
+        translate(faceMove.x,faceMove.y);
+        stroke(0);
+        fill(0);
+        beginShape();
+        noiseMax = slider.value();
+        for (let a = 0; a < TWO_PI; a += 0.01) {
+          let xoff = map(sin(a), -1, 1, 0, noiseMax);
+          let yoff = map(cos(a + phase), -1, 1, 0, noiseMax);
+          let r = map(
+          noise(xoff, yoff, zoff),0,1,noiseMax * 0.75,noiseMax * 1.25);
+          let x = r * cos(a);
+          let y = r * sin(a);
+          vertex(x, y);
+        }
+    endShape(CLOSE);
+    pop();
+  
+    push(); //좌측 눈
+      translate(-noiseMax / 2.55, 0);
+  
+      push(); // 좌측 흰 눈
+        translate(eyeballMove.x,eyeballMove.y);
+  
+        beginShape();
+          for (let i = 0; i < TWO_PI; i += 0.01) {
+          let xof = map(sin(i), -1, 1, 0, noiseMax / 50);
+          let yof = map(cos(i), -1, 1, 0, noiseMax / 50);
+          let r = map(noise(xof, yof, zoff), 0, 1, noiseMax / 2.6, noiseMax / 3);
+          let x = r * sin(i);
+          let y = r * cos(i);
+            fill(255);
+            noStroke();
+            vertex(x, y);
+            }
+        endShape(CLOSE);
+      pop();
+  
+      push(); // 좌측 검정 눈알
+        translate(pupilMove.x,pupilMove.y);
+        beginShape();
+          for (let i = 0; i < TWO_PI; i += 0.01) {
+          let xof = map(sin(i), -1, 1, 0, noiseMax / 50);
+          let yof = map(cos(i), -1, 1, 0, noiseMax / 50);
+          let r = map(noise(xof, yof, zoff), 0, 1, noiseMax / 2.6, noiseMax / 3);
+          let x = r * sin(i);
+          let y = r * cos(i);
+            fill(0);
+            noStroke();
+            vertex(x/5, y/5);    
+            }    
+        endShape(CLOSE);
 
-  x2 = lerp(x2, x1, 0.04);
-  y2 = lerp(y2, y1, 0.04);
-
-  x1 = lerp(x1, x0, 0.04);
-  y1 = lerp(y1, y0, 0.04);
-
-  x0 = lerp(x0, mouseX, 0.04);
-  y0 = lerp(y0, mouseY, 0.04);
-
-  //background("white");
-  noStroke();
-
-  //tint(255,125);
-
-  s = lerp(s, target, 0.035);
-
-  image(img4, x4, y4, 56 * s, 175 * s);
-  image(img3, x3, y3, 56 * s, 175 * s);
-  image(img2, x2, y2, 56 * s, 175 * s);
-  image(img1, x1, y1, 56 * s, 175 * s);
-  image(img0, x0, y0, 56 * s, 175 * s);
-  pop();
+      pop();
+  
+    pop(); //좌측 눈
+  
+      push(); //우측 눈
+      translate(noiseMax / 2.55, 0);
+  
+      push(); // 우측 흰 눈
+        translate(eyeballMove.x,eyeballMove.y);
+        beginShape();
+          for (let i = 0; i < TWO_PI; i += 0.01) {
+          let xof = map(sin(i), -1, 1, 0, noiseMax / 50);
+          let yof = map(cos(i), -1, 1, 0, noiseMax / 50);
+          let r = map(noise(xof, yof, zoff), 0, 1, noiseMax / 3, noiseMax / 2.6);
+          let x = r * sin(i);
+          let y = r * cos(i);
+            fill(255);
+            noStroke();
+            vertex(x, y);    
+            }
+        endShape(CLOSE);
+      pop();
+  
+      push(); // 우측 검정 눈알
+        translate(pupilMove.x,pupilMove.y);
+        beginShape();
+          for (let i = 0; i < TWO_PI; i += 0.01) {
+          let xof = map(sin(i), -1, 1, 0, noiseMax / 50);
+          let yof = map(cos(i), -1, 1, 0, noiseMax / 50);
+          let r = map(noise(xof, yof, zoff), 0, 1, noiseMax / 2.8, noiseMax / 2.4);
+          let x = r * sin(i);
+          let y = r * cos(i);
+            fill(0);
+            noStroke();
+            vertex(x/5, y/5);    
+            }    
+        endShape(CLOSE);
+        // zoff += 0.01;
+      pop();
+  
+    pop(); //우측 눈
+ 
+  zoff += 0.1;
+  // noLoop();
 }
 
-function mouseClicked() {
-  target = target + 0.5;
+function backGradient() {
+  let c3 = map(noiseMax,0,200,0,255)
+
+  c1 = color(0);
+  c2 = color(c3);
+
+  for (let y = 0; y < height; y++) {
+    // Vertical Linear Gradient
+    let colorStep = map(y, 0, height, 0, 1);
+    let newc = lerpColor(c1, c2, colorStep);
+    stroke(newc);
+    line(0, y, width, y);
+  }
 }
