@@ -9,17 +9,10 @@ function preload() {
 
 function setup() {
   createCanvas(1280,720);
-
-  vid = createVideo("vid2.mp4");
-  vid.size(1280);
-  vid.volume(0);
-  vid.loop();
-//   vid.hide();
+  vid = createVideo("vid2.mp4",playVideo);
 
   
-  
-  
-//   placeParticles();
+  placeParticles();
 }
 
 // function windowResized() {
@@ -91,3 +84,11 @@ class Particle {
     circle(this.x, this.y, 3);
   }
 }
+
+function playVideo() {
+  vid.size(1280);
+  vid.volume(0);
+  vid.loop();
+  // vid.hide();
+}
+
