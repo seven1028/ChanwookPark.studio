@@ -62,7 +62,7 @@ class Particle {
     let homeA = atan2(this.homeY - this.y, this.homeX - this.x);
 
     //forces
-    let mouseF = constrain(map(mouseD, 0, 100, 80, 0), 0, 10);
+    let mouseF = constrain(map(mouseD, 0, 50, 50, 0), 0, 100);
     let homeF = map(homeD, 0, 50, 0, 10);
 
     let vx = cos(mouseA) * mouseF;
@@ -76,7 +76,7 @@ class Particle {
   }
 
   show() {
-    drawingContext.shadowBlur = 10;
+    drawingContext.shadowBlur = 20;
   drawingContext.shadowColor = 'white';  
     
     noStroke();
