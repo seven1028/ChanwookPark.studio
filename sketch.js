@@ -26,10 +26,10 @@ function draw() {
     
 
   
-  for (let i = 0; i < particles.length; i++) {
-    particles[i].update();
-    particles[i].show();
-  }
+//   for (let i = 0; i < particles.length; i++) {
+//     particles[i].update();
+//     particles[i].show();
+//   }
 }
 
 function placeParticles() {
