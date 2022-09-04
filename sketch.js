@@ -30,7 +30,6 @@ function draw() {
     particles[i].update();
     particles[i].show();
   }
-  // image(img, 0, 0, width, height);
 }
 
 function placeParticles() {
