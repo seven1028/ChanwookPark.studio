@@ -5,14 +5,16 @@ var vid;
 
 function preload() {
   img = loadImage("text.png");
-  // vid = createVideo("vid2.mp4",playVideo);
+  vid = createVideo("vid2.mp4",playVideo);
+  
 
 }
 
 function setup() {
   createCanvas(1280,720);
-  vid = createVideo("vid2.mp4",playVideo);
-  placeParticles();
+  vid.play();
+  vid.loop();
+  // placeParticles();
 }
 
 // function windowResized() {
@@ -21,6 +23,7 @@ function setup() {
 
 function draw() {
   image(vid,0,0);
+    
 
   
   for (let i = 0; i < particles.length; i++) {
@@ -89,7 +92,6 @@ class Particle {
 
 function playVideo() {
   vid.size(1280);
-  vid.play();
-  vid.loop();
+
 }
 
