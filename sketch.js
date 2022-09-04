@@ -1,19 +1,20 @@
 let particles = [];
 let res = 3;
 let img;
-let vid;
+var vid;
 
 function preload() {
   img = loadImage("text.png");
   vid = createVideo("vid2.mp4",playVideo);
+  
 
 }
 
 function setup() {
   createCanvas(1280,720);
-
-  
-  placeParticles();
+  vid.play();
+  vid.loop();
+  // placeParticles();
 }
 
 // function windowResized() {
@@ -22,12 +23,13 @@ function setup() {
 
 function draw() {
   image(vid,0,0);
+    
+
   
   for (let i = 0; i < particles.length; i++) {
     particles[i].update();
     particles[i].show();
   }
-  // image(img, 0, 0, width, height);
 }
 
 function placeParticles() {
@@ -89,7 +91,6 @@ class Particle {
 
 function playVideo() {
   vid.size(1280);
-      vid.play();
-  vid.loop();
+
 }
 
