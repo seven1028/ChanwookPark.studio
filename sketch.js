@@ -9,14 +9,16 @@ function preload() {
 
 function setup() {
   createCanvas(1280,720);
-    vid.size(1280);
-  vid.loop();
+
   vid = createVideo("vid2.mp4");
+  vid.size(1280);
+  vid.loop();
+  vid.hide();
 
   
   
   
-  // placeParticles();
+  placeParticles();
 }
 
 // function windowResized() {
@@ -80,7 +82,7 @@ class Particle {
   }
 
   show() {
-    drawingContext.shadowBlur = 10;
+    drawingContext.shadowBlur = 20;
   drawingContext.shadowColor = 'white';  
     
     noStroke();
