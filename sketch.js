@@ -11,8 +11,7 @@ function preload() {
 
 function setup() {
   createCanvas(1280,720);
-    vid.play();
-  vid.loop();
+
   
   placeParticles();
 }
@@ -90,5 +89,7 @@ class Particle {
 
 function playVideo() {
   vid.size(1280);
+      vid.play();
+  vid.loop();
 }
 
