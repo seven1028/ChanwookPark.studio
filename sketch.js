@@ -12,6 +12,7 @@ function setup() {
 
   vid = createVideo("vid2.mp4");
   vid.size(1280);
+  vid.volume(0);
   vid.loop();
   vid.hide();
 
@@ -82,7 +83,7 @@ class Particle {
   }
 
   show() {
-    drawingContext.shadowBlur = 20;
+    drawingContext.shadowBlur = 10;
   drawingContext.shadowColor = 'white';  
     
     noStroke();
@@ -90,8 +91,3 @@ class Particle {
     circle(this.x, this.y, 3);
   }
 }
-
-function playVideo() {
-
-}
-
