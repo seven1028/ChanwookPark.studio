@@ -1,96 +1,91 @@
-let particles = [];
-let res = 3;
-let img;
-var vid;
+let poop, bg;
+let poodle, clover, clouds;
+let n = 2;
+let numClover = 60,
+  numClouds = 30;
+let i = 0;
+let x, y;
+
+let speedX = 4;
+let speedY = 2;
 
 function preload() {
-  img = loadImage("text.png");
-  vid = createVideo("vid2.mp4",playVideo);
-  
-
+  poodle = loadImage("assets/walkingPoodle.gif");
+  pooping = loadImage("assets/poopingPoodle.webp");
+  clover = loadImage("assets/4leafClover.webp");
+  clouds = loadImage("assets/clouds.webp");
+  bg = loadImage("assets/bg.JPG");
 }
 
 function setup() {
-  createCanvas(1280,720);
-  vid.play();
-  vid.loop();
-  // placeParticles();
-}
+  createCanvas(600, 600);
 
-// function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight);
-// }
+  poop = createGraphics(width, height);
+  // skyGradient();
+  // makeClover();
+  x = 0;
+  y = 100;
+}
 
 function draw() {
-  image(vid,0,0);
-    
+  background(bg);
 
+  x += speedX;
+  y += speedY;
+  if (x < 0 || x > width) {
+    speedX *= -1;
+  }
+  if (y < 0 || y > height/2-100) {
+    speedY *= -1;
+  }
+  push();
+  imageMode(CENTER);
+  image(clouds, x, y, 96, 96);
+  pop();
   
-//   for (let i = 0; i < particles.length; i++) {
-//     particles[i].update();
-//     particles[i].show();
-//   }
+  image(poop, 0, 0);
+  mouse();
 }
 
-function placeParticles() {
-  for (let i = 0; i < width; i += res)
-    for (let j = 0; j < height; j += res) {
-      let x = (i / width) * img.width;
-      let y = (j / height) * img.height;
-      let c = img.get(x, y);
-
-      if (c[3] != 0) {
-        particles.push(new Particle(i, j, c));
-      }
-    }
+function mouseDragged() {
+  poop.fill(random(0,50));
+  poop.noStroke();
+  poop.circle(mouseX + 20 + 54 * n, mouseY - 30 + 58 * n, random(5, 20));
 }
 
-class Particle {
-  constructor(x, y, c) {
-    this.x = x;
-    this.y = y;
-
-    this.c = c;
-
-    this.homeX = x;
-    this.homeY = y;
+function makeClover() {
+  for (let i = 0; i < numClover; i++) {
+    let s = random(0.3, 1);
+    image(clover, random(0, width), random(height / 2, height), 72 * s, 77 * s);
   }
-
-  update() {
-    //mouse
-    let mouseD = dist(this.x, this.y, mouseX, mouseY);
-    let mouseA = atan2(this.y - mouseY, this.x - mouseX);
-
-    //home
-    let homeD = dist(this.x, this.y, this.homeX, this.homeY);
-    let homeA = atan2(this.homeY - this.y, this.homeX - this.x);
-
-    //forces
-    let mouseF = constrain(map(mouseD, 0, 100, 80, 0), 0, 10);
-    let homeF = map(homeD, 0, 50, 0, 10);
-
-    let vx = cos(mouseA) * mouseF;
-    vx += cos(homeA) * homeF;
-
-    let vy = sin(mouseA) * mouseF;
-    vy += sin(homeA) * homeF;
-
-    this.x += vx;
-    this.y += vy;
-  }
-
-  show() {
-    drawingContext.shadowBlur = 10;
-  drawingContext.shadowColor = 'white';  
-    
-    noStroke();
-    fill(255);
-    circle(this.x, this.y, 3);
+  for (let i = 0; i < numClouds; i++) {
+    let s = random(0.3, 1);
+    image(
+      clouds,
+      random(0, width),
+      random(0, height / 2 - 100),
+      48 * s * 2,
+      48 * s * 2
+    );
   }
 }
 
-function playVideo() {
-  vid.size(1280);
-
+function mouse() {
+  if (mouseIsPressed) {
+    image(pooping, mouseX + 20, mouseY - 30, 64 * n, 64 * n);
+  } else {
+    image(poodle, mouseX + 20, mouseY - 30, 64 * n, 64 * n);
+  }
 }
 
+function skyGradient() {
+  let c1 = color(0, 150, 255);
+  let c2 = color(255);
+
+  for (let y = 0; y < height / 2; y++) {
+    let colorStep = map(y, 0, height / 2, 0, 1);
+    let newc = lerpColor(c1, c2, colorStep);
+    stroke(newc);
+    line(0, y, width, y);
+  }
+}
