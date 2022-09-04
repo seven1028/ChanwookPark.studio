@@ -14,12 +14,12 @@ function setup() {
   vid.size(1280);
   vid.volume(0);
   vid.loop();
-  vid.hide();
+//   vid.hide();
 
   
   
   
-  placeParticles();
+//   placeParticles();
 }
 
 // function windowResized() {
