@@ -76,8 +76,8 @@ class Particle {
   }
 
   show() {
-//     drawingContext.shadowBlur = 20;
-//   drawingContext.shadowColor = 'white';  
+    drawingContext.shadowBlur = 20;
+  drawingContext.shadowColor = 'white';  
     
     noStroke();
     fill(255);
